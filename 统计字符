@@ -1,0 +1,40 @@
+#include<iostream>
+#include<csrting>
+#include<cstdio>
+#include<string>
+using namespace std;
+
+int main()
+{
+string word,sentence;
+int i,j;
+int lena lenb;
+int ans=0,dir;
+
+getline(cin,word);
+getline(cin,sentence);
+lena=word.size();
+lneb=sentence.size();
+
+for(i=0;i<lenb;i++)
+{
+for(j=0;j<lena;j++)
+{
+if(toupper(sentence[i+j]!=toupper(word[j]))
+break;
+if(i>0&&(sentence[i-1]!=' ')
+break;
+}
+if(j==lena&&(sentence[i+j]==' '||j+i==len))
+{
+ans++;
+if(ans==1)
+dir=i;
+}
+}
+if(ans)
+cout<<ans<<' '<<dir<<endl;
+else
+cout<<"-1"<<endl;
+return 0;
+}
