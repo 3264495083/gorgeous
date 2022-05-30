@@ -1,0 +1,194 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Account
+{
+	char name[100];
+	char idCard[19];
+	char password[7];
+	char tel[12];
+	char username[100];//卡号待查询
+	float money;
+	struct Account *next;
+};
+typedef struct Account Account;
+Account *head=NULL;//指向头结点的指针
+Account *tail=NULL;//指向尾结点的指针
+
+void signUp()
+{
+	struct Account x;
+	printf("请输入姓名：\n");
+	scanf("%s",x.name);
+
+	printf("请输入身份证号：\n");
+	scanf("%s",x.idCard);
+
+	printf("请输入密码：\n");
+	scanf("%s",x.password);
+
+	printf("请输入电话号码：\n");
+	scanf("%s",x.name);
+
+	printf("请输入卡号：\n");
+	scanf("%s",x.username);
+
+	x.money=0.0f;
+	
+}
+
+void signup()//英文
+{
+	struct Account x;
+	printf("Please enter your name：\n");
+	scanf("%s",x.name);
+
+	printf("Please enter your ID number：\n");
+	scanf("%s",x.idCard);
+
+	printf("Please input a password：\n");
+	scanf("%s",x.password);
+
+	printf("Please enter the phone number：\n");
+	scanf("%s",x.name);
+
+	printf("Please enter the card number：\n");
+	scanf("%s",x.username);
+
+	x.money=0.0f;
+	
+}
+
+void signIn()
+{
+	struct Account x;
+	printf("请输入卡号：\n");
+	scanf("%s",x.username);
+
+	printf("请输入密码：\n");
+	printf("%s",x.password);
+
+	x.money=0.0f;
+}
+
+void signin()//英文
+{
+	struct Account x;
+	printf("Please enter your card number：\n");
+	scanf("%s",x.username);
+
+	printf("Please enter your password：\n");
+	printf("%s",x.password);
+
+	x.money=0.0f;
+}
+
+void showChinese()
+{
+	printf("输入1，创建账户\n");
+	printf("输入2，登录\n");
+	char b;
+	scanf("%d",&b);
+	if(b==1)
+	{
+		signUp();
+	}
+	else if(b==2)
+	{
+		signIn();
+	}
+}
+
+void showEnglish()//英文
+{
+	printf("Input1，Create account\n");
+	printf("Input2，Sign in\n");
+	char a;
+	scanf("%d",&a);
+	if(a==1)
+	{
+		signup();
+	}
+	else if(a==2)
+	{
+		signin();
+	}
+}
+
+void printfAccount(Account a)
+{
+	printf("%s\t%s\t%s\t%s\t%s\t%f\n",a.name,a.idCard,a.password,a.tel,a.username,a.money);
+}
+
+void printLinkedList()
+{
+	Account *curP=head;
+	while(curP!=NULL)
+	{
+		printfAccount(*curP);
+		curP=curP->next;
+	}
+}
+
+void loadData()
+{
+	FILE*fp=fopen("D:/atm.txt","r");
+	if(fp!=NULL)
+	{
+		while(feof(fp))
+		{
+			Account*newNode=(Account*)malloc(sizeof(Account));
+			fscanf(fp,"%s %s %s %s %s %f\n",newNode->name,newNode->idCard,newNode->password,newNode->tel,newNode->username,newNode->money);
+			newNode->next=NULL;
+			if(head=NULL)
+			{
+				head=newNode;
+				tail=newNode;
+			}
+			else
+			{
+				head->next=newNode;
+				tail=newNode;
+			}
+		}
+	}
+	printf("加载成功\n");
+	printf("successfully loaded\n");
+	fclose(fp);
+}
+
+void saveData()
+{
+	FILE *fp=fopen("D:/atm.txt","w");
+	if(fp!=NULL)
+	{
+		Account *curP=head;
+		while(curP!=NULL)
+		{
+			fscanf(fp,"%s %s %s %s %s %f\n",curP->name,curP->idCard,curP->password,curP->tel,curP->username,curP->money);
+			curP=curP->next;
+		}
+	}
+	fclose(fp);
+}
+
+int main()
+{
+	printf("输入1，选择中文\n");
+	printf("Input 2，Show English\n");
+	char c;
+	scanf("%d",&c);
+	if(c==1)
+	{
+		showChinese();//显示中文菜单
+	}
+	else if(c==2)
+	{
+		showEnglish();//显示英文菜单
+	}
+
+	loadData();
+	printLinkedList();
+	saveData();
+	return 0;
+}
