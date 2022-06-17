@@ -192,3 +192,60 @@ int main()
 	saveData();
 	return 0;
 }
+
+
+int main()
+{
+	printf("               欢迎使用ATM服务             \n");
+	printf("           Welcome to ATM Services         \n");
+	printf("输入1，选择中文           输入2，选择英文  \n");
+	printf("Input 1，Show Chinese     Input 2，Show English\n");
+	char c;
+	scanf("%d",&c);
+	if(c==1)
+	{
+		showChinese();//显示中文菜单
+		int a;
+	    scanf("%d",&a);
+		for(int i=0;i<=100;i++)
+		{
+			switch(a)
+			{
+			case 1:
+				continue;
+			case 2:
+				continue;
+		    default:
+				printf("       请再次输入！   \n");
+			    continue;
+			}
+		}
+	}
+	else if(c==2)
+	{
+		showEnglish();//显示英文菜单
+		int a;
+	    scanf("%d",&a);
+		for(int i=0;i<=100;i++)
+		{
+			switch(a)
+			{
+			case 1:
+				continue;
+			case 2:
+				continue;
+		    default:
+				printf(" Please enter again!\n");
+			    continue;
+			}
+		}
+	}
+	
+	return 0;
+}
+
+
+
+
+
+
