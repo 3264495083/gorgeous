@@ -174,28 +174,6 @@ void saveData()
 
 int main()
 {
-	printf("输入1，选择中文\n");
-	printf("Input 2，Show English\n");
-	char c;
-	scanf("%d",&c);
-	if(c==1)
-	{
-		showChinese();//显示中文菜单
-	}
-	else if(c==2)
-	{
-		showEnglish();//显示英文菜单
-	}
-
-	loadData();
-	printLinkedList();
-	saveData();
-	return 0;
-}
-
-
-int main()
-{
 	printf("               欢迎使用ATM服务             \n");
 	printf("           Welcome to ATM Services         \n");
 	printf("输入1，选择中文           输入2，选择英文  \n");
@@ -206,7 +184,7 @@ int main()
 	{
 		showChinese();//显示中文菜单
 		int a;
-	    scanf("%d",&a);
+	        scanf("%d",&a);
 		for(int i=0;i<=100;i++)
 		{
 			switch(a)
@@ -225,7 +203,7 @@ int main()
 	{
 		showEnglish();//显示英文菜单
 		int a;
-	    scanf("%d",&a);
+	        scanf("%d",&a);
 		for(int i=0;i<=100;i++)
 		{
 			switch(a)
@@ -238,14 +216,10 @@ int main()
 				printf(" Please enter again!\n");
 			    continue;
 			}
-		}
 	}
-	
+
+	loadData();
+	printLinkedList();
+	saveData();
 	return 0;
 }
-
-
-
-
-
-
