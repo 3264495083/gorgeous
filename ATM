@@ -1,145 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
 struct Account
 {
-	char name[100];
-	char idCard[19];
-	char password[7];
-	char tel[12];
-	char username[100];//卡号待查询
-	float money;
-	struct Account *next;
+	char name[100];//姓名 
+	char tel[12];//电话 
+	char idCard[19];//身份证	
+	char username[20];//银行账号卡号
+	char password[7];//密码 
+	float money;//余额
+	struct Account * next; //下一个账户结点的地址 
 };
 typedef struct Account Account;
 Account *head=NULL;//指向头结点的指针
 Account *tail=NULL;//指向尾结点的指针
-
-void signUp()
-{
-	struct Account x;
-	printf("请输入姓名：\n");
-	scanf("%s",x.name);
-
-	printf("请输入身份证号：\n");
-	scanf("%s",x.idCard);
-
-	printf("请输入密码：\n");
-	scanf("%s",x.password);
-
-	printf("请输入电话号码：\n");
-	scanf("%s",x.name);
-
-	printf("请输入卡号：\n");
-	scanf("%s",x.username);
-
-	x.money=0.0f;
-	
-}
-
-void signup()//英文
-{
-	struct Account x;
-	printf("Please enter your name：\n");
-	scanf("%s",x.name);
-
-	printf("Please enter your ID number：\n");
-	scanf("%s",x.idCard);
-
-	printf("Please input a password：\n");
-	scanf("%s",x.password);
-
-	printf("Please enter the phone number：\n");
-	scanf("%s",x.name);
-
-	printf("Please enter the card number：\n");
-	scanf("%s",x.username);
-
-	x.money=0.0f;
-	
-}
-
-void signIn()
-{
-	struct Account x;
-	printf("请输入卡号：\n");
-	scanf("%s",x.username);
-
-	printf("请输入密码：\n");
-	printf("%s",x.password);
-
-	x.money=0.0f;
-}
-
-void signin()//英文
-{
-	struct Account x;
-	printf("Please enter your card number：\n");
-	scanf("%s",x.username);
-
-	printf("Please enter your password：\n");
-	printf("%s",x.password);
-
-	x.money=0.0f;
-}
-
-void showChinese()
-{
-	printf("输入1，创建账户\n");
-	printf("输入2，登录\n");
-	char b;
-	scanf("%d",&b);
-	if(b==1)
-	{
-		signUp();
-	}
-	else if(b==2)
-	{
-		signIn();
-	}
-}
-
-void showEnglish()//英文
-{
-	printf("Input1，Create account\n");
-	printf("Input2，Sign in\n");
-	char a;
-	scanf("%d",&a);
-	if(a==1)
-	{
-		signup();
-	}
-	else if(a==2)
-	{
-		signin();
-	}
-}
-
-void printfAccount(Account a)
-{
-	printf("%s\t%s\t%s\t%s\t%s\t%f\n",a.name,a.idCard,a.password,a.tel,a.username,a.money);
-}
-
-void printLinkedList()
-{
-	Account *curP=head;
-	while(curP!=NULL)
-	{
-		printfAccount(*curP);
-		curP=curP->next;
-	}
-}
 
 void loadData()
 {
 	FILE*fp=fopen("D:/atm.txt","r");
 	if(fp!=NULL)
 	{
-		while(feof(fp))
+		while(!feof(fp))
 		{
+			//创建结点(堆)
 			Account*newNode=(Account*)malloc(sizeof(Account));
-			fscanf(fp,"%s %s %s %s %s %f\n",newNode->name,newNode->idCard,newNode->password,newNode->tel,newNode->username,newNode->money);
+            //结点初始化
 			newNode->next=NULL;
+			fscanf(fp,"%s %s %s %s %s %f\n",newNode->name,newNode->tel,newNode->idCard,newNode->username,newNode->password,newNode->money);
+            //添加结点到链表
 			if(head=NULL)
 			{
 				head=newNode;
@@ -153,8 +42,51 @@ void loadData()
 		}
 	}
 	printf("加载成功\n");
+	fclose(fp);
+}
+
+void loaddata()
+{
+	FILE*fp=fopen("D:/atm.txt","r");
+	if(fp!=NULL)
+	{
+		while(!feof(fp))
+		{
+			//创建结点(堆)
+			Account*newNode=(Account*)malloc(sizeof(Account));
+            //结点初始化
+			newNode->next=NULL;
+			fscanf(fp,"%s %s %s %s %s %f\n",newNode->name,newNode->tel,newNode->idCard,newNode->username,newNode->password,newNode->money);
+            //添加结点到链表
+			if(head=NULL)
+			{
+				head=newNode;
+				tail=newNode;
+			}
+			else
+			{
+				head->next=newNode;
+				tail=newNode;
+			}
+		}
+	}
 	printf("successfully loaded\n");
 	fclose(fp);
+}
+
+void printfAccount(Account a)
+{
+	printf("%s\t%s\t%s\t%s\t%s\t%f\n",a.name,a.tel,a.idCard,a.username,a.password,a.money);
+}
+
+void printLinkedList()
+{
+	Account * curP=head;
+	while(curP!=NULL)
+	{
+		printf("%s\t%s\n",curP->username,curP->password);
+		curP=curP->next;
+	}
 }
 
 void saveData()
@@ -171,55 +103,257 @@ void saveData()
 	}
 	fclose(fp);
 }
+/*中文菜单*/
+void showMenuEnglish()
+{
+	printf("输入1，创建账户\n");
+	printf("输入2，登录\n");
+	char b;
+	scanf("%d",&b);
+	if(b==1)
+	{
+		signUp();
+	}
+	else if(b==2)
+	{
+		signIn();
+	}
+}
+/*中文开户*/
+void signUp()
+{
+	struct Account x;
+	printf("请输入姓名：\n");
+	scanf("%s",x.name);
+
+	printf("请输入身份证号：\n");
+	scanf("%s",x.idCard);
+
+	printf("请输入电话号码：\n");
+	scanf("%s",x.tel);
+
+	printf("请输入卡号：\n");
+	scanf("%s",x.username);
+
+	printf("请输入密码：");
+	scanf("%s",a.password);
+
+	x.money=0.0f;	
+}
+/*中文登录*/
+void signIn()
+{
+	Account a;
+	printf("请输入卡号：");
+	scanf("%s",a.username);
+
+	printf("请输入密码：");
+	scanf("%s",a.password);
+
+	if(findAccount(a))
+	{
+		printf("登录成功\n");
+		showMenu();
+	}
+	else
+	{
+		printf("登录失败！\n");
+	}
+}
+
+/*英文菜单*/
+void showMenuEnglish()
+{
+	printf("Input1，Create account\n");
+	printf("Input2，Sign in\n");
+	char a;
+	scanf("%d",&a);
+	if(a==1)
+	{
+		signup();
+	}
+	else if(a==2)
+	{
+		signin();
+	}
+}
+/*英文开户*/
+{
+	struct Account x;
+	printf("Please enter your name：\n");
+	scanf("%s",x.name);
+
+	printf("Please enter your ID number：\n");
+	scanf("%s",x.idCard);
+
+	printf("Please enter the phone number：\n");
+	scanf("%s",x.tel);
+
+	printf("Please enter the card number：\n");
+	scanf("%s",x.username);
+
+	printf("Please input a password：\n");
+	scanf("%s",x.password);
+
+	x.money=0.0f;	
+}
+/*英文登录*/
+void signin()//英文
+{
+	struct Account x;
+	printf("Please enter your card number：\n");
+	scanf("%s",x.username);
+
+	printf("Please enter your password：\n");
+	printf("%s",x.password);
+
+	x.money=0.0f;
+}
+//找到返回1，找不到返回0
+int findAccount(Account a)
+{
+	Account * curP=head;
+	while(curP!=NULL)
+	{
+		if((strcmp(curP->username,a.username)==0)&&(strcmp(curP->password,a.password)==0))
+		{
+			curAccount = curP;
+			return 1;
+		}
+		curP=curP->next;
+	}
+	return 0;
+}
+//业务
+void showMenu()//中文
+{
+	printf( "\t\t1.存款业务      2.取款业务\n");
+	printf( "\t\t3.转账业务      4.查询业务\n");
+	printf( "\t\t5.修改密码      6.退卡    \n");
+}
+
+void showmenu()
+{
+    printf( "\t\t1. Deposit business      2. Withdrawal business\n");
+    printf( "\t\t3. Transfer business     4. Query business\n");
+    printf( "\t\t5. Change password       6. Return card \n");
+}
+
+
 
 int main()
 {
 	printf("               欢迎使用ATM服务             \n");
 	printf("           Welcome to ATM Services         \n");
-	printf("输入1，选择中文           输入2，选择英文  \n");
+	printf("    输入1，选择中文           输入2，选择英文  \n");
 	printf("Input 1，Show Chinese     Input 2，Show English\n");
-	char c;
-	scanf("%d",&c);
-	if(c==1)
+	int language;
+	scanf("%d",&language);
+	if(language==1)
 	{
-		showChinese();//显示中文菜单
-		int a;
-	        scanf("%d",&a);
-		for(int i=0;i<=100;i++)
+		showMenuChinese(); //显示中文菜单 
+		loadData();
+		printLinkedList();
+		int i;
+		scanf("%d",&i);
+		showMenu();//业务
+		while(1)
 		{
-			switch(a)
+			printf("请选择办理业务:\n");
+			while ( 1 )
 			{
-			case 1:
-				continue;
-			case 2:
-				continue;
-		    default:
-				printf("       请再次输入！   \n");
-			    continue;
+				if(i> 6||i<0)
+				{
+					printf("输入有误，请重新输入:\n");
+				}
+				else 
+				{
+					break;
+				}
+			}
+			switch (i)
+			{
+			case 1: 
+				Deposit();
+				break;
+			case 2: 
+				GetCash();
+				break;
+			case 3: 
+				Transf();
+				break;
+			case 4: 
+				Checkmoney();
+				break;
+			case 5: 
+				ModiPass();
+				break;
+			case 6: 
+				Exit();
+				x = 6;
+				break;
+			default:
+				break;
+			}
+			if (i == 6)
+			{
+				break;
 			}
 		}
-	}
-	else if(c==2)
-	{
-		showEnglish();//显示英文菜单
-		int a;
-	        scanf("%d",&a);
-		for(int i=0;i<=100;i++)
-		{
-			switch(a)
-			{
-			case 1:
-				continue;
-			case 2:
-				continue;
-		    default:
-				printf(" Please enter again!\n");
-			    continue;
-			}
-	}
-
-	loadData();
-	printLinkedList();
 	saveData();
+	}
+	else if(language==2)
+	{
+		showMenuEnglish(); //显示英文菜单 
+		loadata();
+		printLinkedList();
+		int a;
+		scanf("%d",&a);
+		showmenu();//业务
+        while(1)
+		{
+			printf( "Please Select Service:\n");
+			while ( 1 )
+			{
+				if(a> 6||a<0)
+				{
+					printf("输入有误，请重新输入:\n");
+				}
+				else 
+				{
+					break;
+				}
+			}
+			switch (a)
+			{
+			case 1: 
+				deposit();
+				break;
+			case 2: 
+				getCash();
+				break;
+			case 3: 
+				transf();
+				break;
+			case 4: 
+				checkmoney();
+				break;
+			case 5: 
+				modiPass();
+				break;
+			case 6: 
+				exit();
+				x = 6;
+				break;
+			default:
+				break;
+			}
+			if (i == 6)
+			{
+				break;
+			}
+		}
+		saveData();
+	}
 	return 0;
 }
