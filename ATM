@@ -337,7 +337,8 @@ void flag3()
 	} 
 }
 //开户 
-void zhuce(){
+void zhuce()
+{
 	FILE *nchuhu=fopen("chuh.txt","r");
 	FILE *fchuhu=fopen("chuh.txt","a");
 	int i;
