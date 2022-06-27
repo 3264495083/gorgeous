@@ -13,30 +13,31 @@ struct chuhu
 }hu[N]; 
 
 void date();//显示当前日期
+void eDate();
 int a,a1;//主界面选择变量 
-void Flag1();//主界面
-void flag1();
-void Flag2();//用户界面
-void flag2();
-void Flag3();//用户功能选择界面
-void flag3();
+void flag1();//主界面
+void eflag1();
+void flag2();//用户界面
+void eflag2();
+void flag3();//用户功能选择界面
+void eflag3();
 void zhuce();//注册 
-void Zhuce();
+void eZhuce();
 int yanzheng();//验证存单号或密码 
-int Yanzheng();
+int eYanzheng();
 //&&&&&&&&&&&&&&&&&&&&&&&
-void qukaun();//取款
-void Qukuan();
-void cunkaun();//存款
-void Cunkuan();
+void qukuan();//取款
+void eQukuan();
+void cunkuan();//存款
+void eCunkuan();
 void display();//查询
-void Display();
+void eDisplay();
 void zhuan();//转账 
-void Zhuan();
+void eZhuan();
 void xiugai();//密码修改 
-void Xiugai();
+void eXiugai();
 void display();//查找
-void Display(); 
+void eDisplay(); 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&
 int A,key;//开户人数 
 int i;//控制密码循环 
@@ -45,7 +46,7 @@ double jin;//存的钱
 int t;
 
 char id[11],password[7];
-
+//主函数
 int main()
 {
 	system("COLOR 0A"); 
@@ -59,37 +60,10 @@ int main()
 	if(language==1)
 	{
 		int b;
-		Flag1();//引入主界面
+		flag1();//引入主界面
 		do
 		{	
 			printf("\n\n\t\t##请输入你的选择：");
-			scanf("%d",&a); 
-			switch(a)
-			{
-			case 1:
-				zhuce();//zhuce
-				Flag1(); 
-				break;
-			case 2:
-				b=yanzheng();
-				fflush(stdin);///好东西，以防跳过数据
-				Flag2();
-				break;
-			case 3:
-				exit(0);
-				break;
-			default:
-				printf("\n\n\n\t\t您输入的数据不符合要求!!!\n\n\n\n\n");
-			}
-		}while(1);
-	}
-	else if(language==2)
-	{
-		int b;
-		flag1();//引入主界面
-		do
-		{
-			printf("\n\n\t\t##Please enter your choice：");
 			scanf("%d",&a); 
 			switch(a)
 			{
@@ -106,14 +80,42 @@ int main()
 				exit(0);
 				break;
 			default:
+				printf("\n\n\n\t\t您输入的数据不符合要求!!!\n\n\n\n\n");
+			}
+		}while(1);
+	}
+	else if(language==2)
+	{
+		int b;
+		eflag1();//引入主界面
+		do
+		{
+			printf("\n\n\t\t##Please enter your choice：");
+			scanf("%d",&a); 
+			switch(a)
+			{
+			case 1:
+				zhuce();//zhuce
+				eflag1(); 
+				break;
+			case 2:
+				b=eYanzheng();
+				fflush(stdin);///好东西，以防跳过数据
+				eflag2();
+				break;
+			case 3:
+				exit(0);
+				break;
+			default:
 				printf("\n\n\n\t\tThe data you have entered does not meet the requirements!!!\n\n\n\n\n");
 			}
 		}while(1);
 	}
+	return 0;
 }
 
 //主菜单
-void Flag1()
+void flag1()
 {
 	printf("\n#################################################################################\n");
     printf("\n▓                          * 银行定期储蓄管理系统  *                           ▓\n");
@@ -127,7 +129,7 @@ void Flag1()
 	printf("          ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆\n");
 	printf("\n#################################################################################\n");	
 }
-void flag1() 
+void eflag1() 
 {
 	printf("\n################################################################################################\n");
     printf("\n▓                           * Bank Regular Deposit Management System  *                      ▓\n");
@@ -142,7 +144,7 @@ void flag1()
 	printf("\n################################################################################################\n");
 }
 //用户界面 
-void Flag2()
+void flag2()
 {
 	int a,b;//选择功能的变量
 	do
@@ -176,14 +178,14 @@ void Flag2()
 			{ 
 				system("cls");
 				fflush(stdin);
-				cunkaun();
+				cunkuan();
 				break;//存款
 			} 
 		case 2:  
 			{
 				system("cls");
 				fflush(stdin);
-				qukaun();
+				qukuan();
 				break;//取款
 			}
 		case 3: 
@@ -213,7 +215,7 @@ void Flag2()
 		}
 	   } while(1);
 } 
-void flag2()
+void eflag2()
 {	
 	int a,b;//选择功能的变量
 	do
@@ -222,7 +224,7 @@ void flag2()
 		fflush(stdin);
 		scanf("%c",&ch);
 		system("cls");//清屏
-		date(); 
+		eDate(); 
 		printf("\n##########################################################################################\n");
 		printf("\n▓                                   *welcome to use*                                   ▓\n");
 		printf("\n##########################################################################################\n");
@@ -247,33 +249,33 @@ void flag2()
 			{ 
 				system("cls");
 				fflush(stdin);
-				cunkaun();
+				eCunkuan();
 				break;//存款
 			} 
 		case 2:  
 			{
 				system("cls");
 				fflush(stdin);
-				qukaun();
+				eQukuan();
 				break;//取款
 			}
 		case 3: 
 			{
-				display();//查询业务
+				eDisplay();//查询业务
 				break;
 			}
 		case 4:
 			{
 				system("cls");
 				fflush(stdin);
-				zhuan();
+				eZhuan();
 				break;//转账 
 			}
 		case 5: 
 			{
 				system("cls");
 				fflush(stdin);
-				xiugai();
+			    eXiugai();
 				break;//密码修改
 			}
 		case 6:
@@ -284,7 +286,7 @@ void flag2()
 	   } while(1);
 }
 //用户功能选择界面 
-void Flag3()
+void flag3()
 {
 	printf("\n\n\t\t##请输入你的选择：");
 	scanf("%d",&a1);
@@ -310,7 +312,7 @@ void Flag3()
 		break;  
 	} 
 }
-void flag3()
+void eflag3()
 {
 	printf("\n\n\t\t##Please enter your choice：");
 	scanf("%d",&a1);
@@ -394,7 +396,8 @@ void zhuce()
 	fclose(nchuhu);
 	fclose(fchuhu);
 }
-void Zhuce(){
+void eZhuce()
+{
 	FILE *nchuhu=fopen("chuh.txt","r");
 	FILE *fchuhu=fopen("chuh.txt","a");
 	int i;
@@ -405,7 +408,7 @@ void Zhuce(){
 	do
 	{
 		system("cls");
-		date();//显示当前日期 
+		eDate();//显示当前日期 
 		printf("\n\n\t\tPlease enter new depositor information：");
 		fscanf(nchuhu,"%s\t%s\t%s\t%s\t%lf\n",&hu[A].idnum,&hu[A].name,&hu[A].idnumber,&hu[A].password,&hu[A].cunkuan); 
 		printf("\n\n\t\tdepositor deposit slip：");
@@ -498,7 +501,7 @@ int yanzheng()
 	fclose(fchuhu);
 	return count;
 }
-int Yanzheng()
+int eYanzheng()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	int count=0;
@@ -545,7 +548,7 @@ int Yanzheng()
 	return count;
 }
 //存款
-void cunkaun()
+void cunkuan()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	FILE *achuhu=fopen("back.txt","w");
@@ -680,7 +683,7 @@ void cunkaun()
 		   }
 		}
 }
-void Cunkaun()
+void eCunkuan()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	FILE *achuhu=fopen("back.txt","w");
@@ -699,7 +702,7 @@ void Cunkaun()
 		fscanf(fchuhu,"%s\t%s\t%s\t%s\t%lf\n",&hu[i].idnum,&hu[i].name,&hu[i].idnumber,&hu[i].password,&hu[i].cunkuan);
 	}	
 	int x=0;
-	date();
+	eDate();
 	printf("\n\n\t\t##Please enter and confirm the deposit slip again：");
 	scanf("%s",&id);
 	for(i=0;i<=100;i++)
@@ -817,7 +820,7 @@ void Cunkaun()
 		}
 }
 //取款 
-void qukaun()
+void qukuan()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	FILE *achuhu=fopen("back.txt","w");
@@ -951,7 +954,7 @@ void qukaun()
 			}
         }				
 }
-void Qukaun()
+void eQukuan()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	FILE *achuhu=fopen("back.txt","w");
@@ -969,7 +972,7 @@ void Qukaun()
 	{
 		fscanf(fchuhu,"%s\t%s\t%s\t%s\t%lf\n",&hu[i].idnum,&hu[i].name,&hu[i].idnumber,&hu[i].password,&hu[i].cunkuan);
 	}
-	date();
+	eDate();
     printf("\n\n\t\tPlease enter and confirm the deposit slip again：");
 	scanf("%s",&id);
 	for(i=0;i<=99;i++)
@@ -1118,7 +1121,7 @@ void zhuan()
 		}		
 	}	
 } 
-void Zhuan()
+void eZhuan()
 {
 	FILE *fchuhu=fopen("chuh.txt","r+");
 	int i;
@@ -1195,7 +1198,7 @@ void xiugai()
 		}	
 	}	
 }
-void Xiugai()
+void eXiugai()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	FILE *achuhu=fopen("back.txt","w");
@@ -1213,7 +1216,7 @@ void Xiugai()
 	{
 		fscanf(fchuhu,"%s\t%s\t%s\t%s\t%lf\n",&hu[i].idnum,&hu[i].name,&hu[i].idnumber,&hu[i].password,&hu[i].cunkuan);
 	}
-	date();
+	eDate();
 	printf("\n\n\t\tPlease enter and confirm the deposit slip again：");
 	scanf("%s",&id);
 	for(i=0;i<=99;i++)
@@ -1272,7 +1275,7 @@ void display()
 		}
 	}		
 }
-void Display()
+void eDisplay()
 {
 	FILE *fchuhu=fopen("chuh.txt","r");
 	int i,n=0;
@@ -1310,6 +1313,12 @@ void date()
 	printf("当前日期：");
 	system("date/t");
 	printf("当前时间：");
-	system("time/t"); 
-	
+	system("time/t"); 	
+}
+void eDate()
+{
+	printf("current date：");
+	system("date/t");
+	printf("current time：");
+	system("time/t"); 	
 }
