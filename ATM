@@ -95,7 +95,7 @@ int main()
 			switch(a)
 			{
 			case 1:
-				zhuce();//zhuce
+				eZhuce();//zhuce
 				eflag1(); 
 				break;
 			case 2:
