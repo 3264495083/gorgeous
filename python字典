@@ -1,0 +1,42 @@
+#stu={"name":"张三","english":80,"python":90,"math":100}
+# 输入5个学生的成绩并存储到列表scores中
+scores = []
+for i in range(5):    
+    stu = {}    
+    name = input("请输入学生姓名：")    
+    english = int(input("请输入英语成绩："))    
+    python = int(input("请输入Python成绩："))   
+    math = int(input("请输入数学成绩："))    
+    stu['name'] = name    
+    stu['english'] = english    
+    stu['python'] = python    
+    stu['math'] = math    
+    scores.append(stu)
+# 计算每位同学的平均成绩，添加average键并存储平均成绩
+for stu in scores:    
+    avg_score = round((stu['english'] + stu['python'] + stu['math']) / 3, 2)  
+    stu['avg'] = avg_score
+# 输出每位学生的成绩及平均成绩
+sorted_scores = sorted(scores, key=lambda k: k["avg"], reverse=True)
+for stu in sorted_scores:
+    print("name: {}, english: {}, python: {}, math: {}, avg: {}".format(stu['name'], stu['english'], stu['python'], stu['math'], stu['avg']))
+#判断各科成绩不及格名单
+for stu in scores:
+    if stu['english'] < 60:
+        print("英语不及格的学生姓名为：", stu['name'])
+    if stu["python"] < 60:
+        print("Python不及格的学生姓名为：", stu['name'])
+    if stu["math"] < 60:
+        print("数学不及格的学生姓名为：", stu['name'])  
+#判断成绩不合格的第二种方法
+english=python=math=0
+for i in range(5):
+    if scores[i]['english'] < 60:
+        english=i
+        print("英语不及格的学生姓名为：", scores[english]['name'])
+    if scores[i]["python"] < 60:
+        python=i
+        print("Python不及格的学生姓名为：", scores[python]['name'])
+    if scores[i]["math"] < 60:
+        math=i
+        print("数学不及格的学生姓名为：", scores[math]['name'])  
